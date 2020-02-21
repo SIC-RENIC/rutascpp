@@ -14,4 +14,8 @@ LocalidadE::LocalidadE(const Localidad &loc) {
     y = loc.y;
     z = loc.z;
 
+    distancia_min_eventos=0.0;
+    pob_bene=0;
+    distancia_promedio=0.0;
+    distanciapob=0.0;
 }

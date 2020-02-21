@@ -9,8 +9,12 @@
 
 class Salida {
 private:
+    vector<LocalidadE>& vloce;
 public:
     Salida();
+
+    Salida(vector<LocalidadE> &vloce);
+
     void imprime();
 };
 

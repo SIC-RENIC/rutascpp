@@ -62,7 +62,7 @@ void Algoritmo::calculaEstRuta() {
 }
 
 /**
- * Método que calcula la poblacion beneficiario de los eventos a un radio maximo
+ * Método que calcula la poblacion beneficiaria de los eventos a un radio maximo
  * @param leve
  */
 void Algoritmo::calculaPobBen(Ruta &r, Localidad &leve) {

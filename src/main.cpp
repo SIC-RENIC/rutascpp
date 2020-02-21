@@ -35,6 +35,7 @@ int main(int argc, char *argv[]) {
 
     Algoritmo malg(vLocs, vRuta,vLocsE);
 
+Salida salida(vLocsE);
 
     return 0;
 }

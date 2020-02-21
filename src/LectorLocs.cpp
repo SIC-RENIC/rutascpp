@@ -27,27 +27,31 @@ void LectorLocs::parser(string scad) {
     vector<string> vc;
     split(vc,scad,DELIMETER);
 
-    if(vc.size()==6){
+    if(vc.size()==6) {
         Localidad loc;
 
-        loc.id=eml2conapo(atoi(vc[0].c_str()),atoi(vc[1].c_str()),atoi(vc[2].c_str()));
+        loc.id = eml2conapo(atoi(vc[0].c_str()), atoi(vc[1].c_str()), atoi(vc[2].c_str()));
 
-        loc.lng=atof(vc[3].c_str());
-        loc.lat=atof(vc[4].c_str());
+        loc.lng = atof(vc[3].c_str());
+        loc.lat = atof(vc[4].c_str());
 
-        double_t * res = new double_t[3];
+        double_t *res = new double_t[3];
 
-        cesfe2carte(deg2rad(loc.lat),deg2rad(loc.lng),res);
+        cesfe2carte(deg2rad(loc.lat), deg2rad(loc.lng), res);
 
-        loc.x=*res;
-        loc.y=*(res+1);
-        loc.z=*(res+2);
+        loc.x = *res;
+        loc.y = *(res + 1);
+        loc.z = *(res + 2);
 
         delete[] res;
 
-        loc.pob=atoi(vc[5].c_str());
+        loc.pob = atoi(vc[5].c_str());
 
-        vlocs.push_back(loc);
+        if (loc.pob <= 0) {
+            loc.pob=1;
+        }
+            vlocs.push_back(loc);
+
     }
 
 }
