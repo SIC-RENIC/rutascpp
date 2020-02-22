@@ -10,10 +10,12 @@
 class Salida {
 private:
     vector<LocalidadE>& vloce;
-public:
-    Salida();
+    string nomarch;
 
-    Salida(vector<LocalidadE> &vloce);
+public:
+
+
+    Salida(vector<LocalidadE> &vloce, string nomarch);
 
     void imprime();
 };

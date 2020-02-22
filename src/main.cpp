@@ -1,7 +1,7 @@
 
 /**
  * Para ejecutar probar:
- * ./rutascpp /home/alfonso/NetBeansProjects/RENIC/utiles/cac2/localidades2016.txt ../ruta.txt
+ * ./rutascpp /home/alfonso/NetBeansProjects/RENIC/utiles/cac2/localidades2016.txt ../ruta.txt ./salida_numero.csv
  */
 #include "rutascpp.h"
 #include "LectorLocs.h"
@@ -17,25 +17,29 @@ vector<LocalidadE> vLocsE;
 int main(int argc, char *argv[]) {
 
 
-   /* if (argc < 3) {
-        cerr << "No estan completos los parámetros:" << endl;
-        cerr << "rutascpp ArchivoLoc ArchivoREve ArchivoSal" << endl << endl;
-        cerr << "\t ArchivoLoc:\tArchivo de localidades" << endl;
-        cerr << "\t ArchivoREve:\tArchivo de eventos realizados" << endl;
-        cerr << "\t ArchivoSal:\tArchivo de salidas" << endl;
-        return 1;
-    }*/
+    string snomarch_salida;
+
+    if (argc < 3) {
+         cerr << "No estan completos los parámetros:" << endl;
+         cerr << "rutascpp ArchivoLoc ArchivoREve ArchivoSal" << endl << endl;
+         cerr << "\t ArchivoLoc:\tArchivo de localidades" << endl;
+         cerr << "\t ArchivoREve:\tArchivo de eventos realizados" << endl;
+         cerr << "\t ArchivoSal:\tArchivo de salidas" << endl;
+         return 1;
+     }
 
 
-    LectorLocs mllocs(string(argv[1]),vLocs);
+    snomarch_salida=string(argv[3]);
 
-    LectorRutas mlruta(string(argv[2]),vRuta,vLocs);
+    LectorLocs mllocs(string(argv[1]), vLocs);
 
-    cout << "Total de localidades: "<<vLocs.size()<<", puntos ruta: "<<vRuta[0].vloc.size()<<endl;
+    LectorRutas mlruta(string(argv[2]), vRuta, vLocs);
 
-    Algoritmo malg(vLocs, vRuta,vLocsE);
+    cout << "Total de localidades: " << vLocs.size() << ", puntos ruta: " << vRuta[0].vloc.size() << endl;
 
-Salida salida(vLocsE);
+    Algoritmo malg(vLocs, vRuta, vLocsE);
+
+    Salida salida(vLocsE,snomarch_salida );
 
     return 0;
 }

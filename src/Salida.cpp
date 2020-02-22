@@ -12,7 +12,7 @@ void Salida::imprime() {
 
     ofstream fsal;
 
-    fsal.open("salida.txt");
+    fsal.open(nomarch);
 
     for(auto itloc=vloce.begin(); itloc != vloce.end(); ++itloc) {
             fsal << itloc->id << "," << itloc->lng << "," << itloc->lat << "," << itloc->distancia_min_eventos << ","
@@ -25,7 +25,7 @@ void Salida::imprime() {
 
 }
 
-Salida::Salida(vector<LocalidadE> &vloce) : vloce(vloce) {
+Salida::Salida(vector<LocalidadE> &vloce, string nomarch) : vloce(vloce), nomarch(nomarch) {
     imprime();
 }
 
