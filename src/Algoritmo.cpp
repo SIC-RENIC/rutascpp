@@ -80,7 +80,7 @@ void Algoritmo::calculaPobBen(Ruta &r, Localidad &leve) {
 /**
  * Metodo que busca una localidad
  */
-void Algoritmo::buscaLocalidad(void) {
+void Algoritmo::buscaLocalidad() {
 
      vector<int> vin;
 

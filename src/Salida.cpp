@@ -15,10 +15,8 @@ void Salida::imprime() {
     fsal.open("salida.txt");
 
     for(auto itloc=vloce.begin(); itloc != vloce.end(); ++itloc) {
-
             fsal << itloc->id << "," << itloc->lng << "," << itloc->lat << "," << itloc->distancia_min_eventos << ","
                  << itloc->pob_bene << "," << itloc->distanciapob << "," << itloc->distancia_promedio << endl;
-
     }
 
 
