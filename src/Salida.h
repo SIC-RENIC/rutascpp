@@ -9,15 +9,17 @@
 
 class Salida {
 private:
-    vector<LocalidadE>& vloce;
+
     string nomarch;
 
 public:
 
 
-    Salida(vector<LocalidadE> &vloce, string nomarch);
+    Salida(string nomarch);
 
-    void imprime();
+    void imprimeLocsP(vector<LocalidadE> &vloce);
+
+    void imprimeDatosRuta(Ruta &r);
 };
 
 

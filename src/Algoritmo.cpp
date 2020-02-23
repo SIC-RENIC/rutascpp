@@ -22,7 +22,7 @@ Algoritmo::Algoritmo(vector<Localidad> &vLoc, vector<Ruta> &vRuta, vector<Locali
  * @param p2
  * @return
  */
-double_t Algoritmo::distanciaML2L(Localidad &p1, Localidad &p2) {
+double_t Algoritmo::distminML2L(Localidad &p1, Localidad &p2) {
 
     double d = (p1.x * p2.x);
     d += (p1.y * p2.y);
@@ -48,7 +48,7 @@ void Algoritmo::calculaEstRuta() {
 
     if (tam >= 1) {
         for (size_t i = 1; i < tam; i++) {
-            vRuta[0].costorec += distanciaML2L(vRuta[0].vloc[i], vRuta[0].vloc[i - 1]);
+            vRuta[0].costorec += distminML2L(vRuta[0].vloc[i], vRuta[0].vloc[i - 1]);
             vRuta[0].pobtot += vRuta[0].vloc[i].pob;
         }
     }
@@ -62,13 +62,13 @@ void Algoritmo::calculaEstRuta() {
 }
 
 /**
- * Método que calcula la poblacion beneficiaria de los eventos a un radio maximo
+ * Método que calcula la población beneficiaria de los eventos a un radio maximo
  * @param leve
  */
 void Algoritmo::calculaPobBen(Ruta &r, Localidad &leve) {
 
     for (auto it = vLoc.begin(); it != vLoc.end(); ++it) {
-        double_t daux = distanciaML2L(*it, leve);
+        double_t daux = distminML2L(*it, leve);
         if (daux <= radio_max) {
             r.pobtot += it->pob;
             r.costopob += it->pob * daux;
@@ -78,37 +78,25 @@ void Algoritmo::calculaPobBen(Ruta &r, Localidad &leve) {
 }
 
 /**
- * Metodo que busca una localidad
+ * Método que busca una localidad que se de la mejor atencion posible como candidata a recibir un evento
  */
 void Algoritmo::buscaLocalidad() {
-
-     vector<int> vin;
-
-
-     for (auto it = vRuta[0].vloc.begin(); it != vRuta[0].vloc.end(); ++it) {
-         vin.push_back(it->id);
-     }
+    double_t distE = vRuta[0].dist_eve;
+    cout << "Distancia entre eventos: " << distE << endl;
 
     for (auto it = vLoc.begin(); it != vLoc.end(); ++it) {
         bool besta = false;
-        for (auto jt = vin.begin(); jt != vin.end(); ++jt) {
-            if (*jt == it->id) {
-                besta = true;
-                break;
-            }
+
+        auto iter = find(vRuta[0].vloc.begin(), vRuta[0].vloc.end(), *it);
+        if (iter != vRuta[0].vloc.end()) {
+            besta = true;
         }
 
-      /*  auto iter =find(vRuta[0].vloc.begin(), vRuta[0].vloc.end(), *it);
-        if ( iter !=  vRuta[0].vloc.end()) {
-            besta = true;
-        }*/
-
-
         if (!besta) {
-            double_t daux = distanciaML2R(vRuta[0], *it);
-            if (daux >= vRuta[0].dist_eve && it->pob >= pob_min_e) {
+            double_t daux = distminML2R(vRuta[0], *it);
+            if (daux >= distE && daux <= 3 * distE && it->pob >= pob_min_e) {
                 LocalidadE loce = *it;
-                loce.distancia_min_eventos=distanciaML2R(vRuta[0],loce);
+                loce.distancia_min_eventos = distminML2R(vRuta[0], loce);
                 calculaPobBen(loce);
                 vLocE.push_back(loce);
             }
@@ -119,18 +107,18 @@ void Algoritmo::buscaLocalidad() {
 }
 
 /**
- * Metodo que calcula la distancia mínima a una ruta
+ * Método que calcula la distancia mínima a una ruta
  * @param r
  * @param loc
  * @return
  */
-double_t Algoritmo::distanciaML2R(Ruta &r, Localidad &loc) {
+double_t Algoritmo::distminML2R(Ruta &r, Localidad &loc) {
 
     double_t daux, dmin = 4 * RT;
 
     for (auto it = r.vloc.begin(); it != r.vloc.end(); ++it) {
 
-        daux = distanciaML2L(*it, loc);
+        daux = distminML2L(*it, loc);
         if (daux <= dmin) {
             dmin = daux;
         }
@@ -146,16 +134,16 @@ double_t Algoritmo::distanciaML2R(Ruta &r, Localidad &loc) {
 void Algoritmo::calculaPobBen(LocalidadE &loc) {
 
     for (auto it = vLoc.begin(); it != vLoc.end(); ++it) {
-        double_t daux = this->distanciaML2L(*it, loc);
+        double_t daux = this->distminML2L(*it, loc);
         if (daux <= radio_max) {
             loc.pob_bene += it->pob;
             loc.distanciapob += (it->pob * daux);
         }
     }
 
-    if(loc.pob_bene>0){
+    if (loc.pob_bene > 0) {
         loc.distancia_promedio = loc.distanciapob / loc.pob_bene;
-    }else{
-        loc.distancia_promedio=-1;
+    } else {
+        loc.distancia_promedio = -1;
     }
 }

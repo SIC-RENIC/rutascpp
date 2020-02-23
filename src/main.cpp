@@ -16,20 +16,19 @@ vector<LocalidadE> vLocsE;
 
 int main(int argc, char *argv[]) {
 
-
     string snomarch_salida;
 
     if (argc < 3) {
-         cerr << "No estan completos los parámetros:" << endl;
-         cerr << "rutascpp ArchivoLoc ArchivoREve ArchivoSal" << endl << endl;
-         cerr << "\t ArchivoLoc:\tArchivo de localidades" << endl;
-         cerr << "\t ArchivoREve:\tArchivo de eventos realizados" << endl;
-         cerr << "\t ArchivoSal:\tArchivo de salidas" << endl;
-         return 1;
-     }
+        cerr << "No estan completos los parámetros:" << endl;
+        cerr << "rutascpp ArchivoLoc ArchivoREve ArchivoSal" << endl << endl;
+        cerr << "\t ArchivoLoc:\tArchivo de localidades" << endl;
+        cerr << "\t ArchivoREve:\tArchivo de eventos realizados" << endl;
+        cerr << "\t ArchivoSal:\tArchivo de salidas" << endl;
+        return 1;
+    }
 
 
-    snomarch_salida=string(argv[3]);
+    snomarch_salida = string(argv[3]);
 
     LectorLocs mllocs(string(argv[1]), vLocs);
 
@@ -39,7 +38,11 @@ int main(int argc, char *argv[]) {
 
     Algoritmo malg(vLocs, vRuta, vLocsE);
 
-    Salida salida(vLocsE,snomarch_salida );
+
+    Salida salida(snomarch_salida);
+    salida.imprimeLocsP(vLocsE);
+    salida.imprimeDatosRuta(vRuta[0]);
+
 
     return 0;
 }

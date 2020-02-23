@@ -23,9 +23,9 @@
 
 
 
-#define DELIMETER " "
+#define DELIMITADOR " "
 
-#define radio_max 20000
+#define radio_max 10000
 #define pob_min_e 5000
 #define RT  6.3710088E6
 

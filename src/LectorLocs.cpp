@@ -25,15 +25,15 @@ void LectorLocs::inicializa(void) {
 
 void LectorLocs::parser(string scad) {
     vector<string> vc;
-    split(vc,scad,DELIMETER);
+    split(vc, scad, DELIMITADOR);
 
     if(vc.size()==6) {
         Localidad loc;
 
         loc.id = eml2conapo(atoi(vc[0].c_str()), atoi(vc[1].c_str()), atoi(vc[2].c_str()));
 
-        loc.lng = atof(vc[3].c_str());
-        loc.lat = atof(vc[4].c_str());
+        loc.lng = atof(vc[4].c_str());
+        loc.lat = atof(vc[3].c_str());
 
         double_t *res = new double_t[3];
 

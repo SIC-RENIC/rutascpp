@@ -37,7 +37,7 @@ void LectorRutas::inicializa(void) {
 
 void LectorRutas::parser(Ruta &r, string scad) {
     vector<string> vc;
-    split(vc, scad, DELIMETER);
+    split(vc, scad, DELIMITADOR);
 
     if (vc.size() == 3) {
         ponLocalidad(r, eml2conapo(atoi(vc[0].c_str()), atoi(vc[1].c_str()), atoi(vc[2].c_str())));

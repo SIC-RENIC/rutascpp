@@ -15,12 +15,9 @@ private:
     vector<Ruta>& vRuta;
     vector<LocalidadE>& vLocE;
 
-    double_t distprom_e;
-    double_t poblacion_total;
+    double_t distminML2L(Localidad &p1, Localidad &p2);
 
-    double_t distanciaML2L(Localidad &p1, Localidad &p2);
-
-    double_t distanciaML2R(Ruta &r,Localidad &loc);
+    double_t distminML2R(Ruta &r, Localidad &loc);
 
     void calculaEstRuta();
 

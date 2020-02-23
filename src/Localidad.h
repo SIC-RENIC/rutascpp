@@ -21,6 +21,11 @@ public:
 
     int pob;
 
+    bool operator==(const Localidad &loc) const {
+        return loc.id==id;
+    }
+
+
 };
 
 
